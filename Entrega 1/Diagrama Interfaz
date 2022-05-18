@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-05-18T03:00:49.094Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36" etag="b2n3PuHSkK0gRS5EOfja" version="18.0.3" type="github">
+<mxfile host="app.diagrams.net" modified="2022-05-18T03:14:30.631Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36" etag="tvQd3Yes5FV8ae0v6xDc" version="18.0.3" type="github">
   <diagram id="h4XTnrt-Ws0z2NUcfcQX" name="Page-1">
-    <mxGraphModel dx="5349" dy="2353" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="4026" dy="1264" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -14,7 +14,7 @@
           <mxGeometry y="80" width="350" height="80" as="geometry" />
         </mxCell>
         <mxCell id="CPfuPH1P0XgbApZGi2eW-1" value="&lt;b&gt;&lt;font style=&quot;font-size: 37px&quot;&gt;DISEÑO DE LA INTERFAZ&lt;/font&gt;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="230" y="-100" width="690" height="180" as="geometry" />
+          <mxGeometry x="235" y="50" width="690" height="180" as="geometry" />
         </mxCell>
         <mxCell id="-Fn23PZzocksT9DnSk9b-1" value="DialogAgregarParticipante" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
           <mxGeometry x="20" y="1652" width="250" height="258" as="geometry" />
@@ -27,18 +27,6 @@
         </mxCell>
         <mxCell id="-Fn23PZzocksT9DnSk9b-4" value="+ DialogAgregarParticipante&#xa;(MenuProyecto padre): void&#xa;+ actionPerformed(ActionEvent e): void&#xa;+ keyPressed(KeyEvent e): void&#xa;+ keyTyped(KeyEvent e): void&#xa;+ keyReleased(KeyEvent e): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="-Fn23PZzocksT9DnSk9b-1" vertex="1">
           <mxGeometry y="138" width="250" height="120" as="geometry" />
-        </mxCell>
-        <mxCell id="-Fn23PZzocksT9DnSk9b-10" value="HintTextField" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
-          <mxGeometry x="175" y="170" width="220" height="150" as="geometry" />
-        </mxCell>
-        <mxCell id="-Fn23PZzocksT9DnSk9b-11" value="- final hint: String&#xa;- showingHint: boolean " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="-Fn23PZzocksT9DnSk9b-10" vertex="1">
-          <mxGeometry y="26" width="220" height="44" as="geometry" />
-        </mxCell>
-        <mxCell id="-Fn23PZzocksT9DnSk9b-12" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="-Fn23PZzocksT9DnSk9b-10" vertex="1">
-          <mxGeometry y="70" width="220" height="8" as="geometry" />
-        </mxCell>
-        <mxCell id="-Fn23PZzocksT9DnSk9b-13" value="+ HintTextField(final String hint): void&#xa;+ focusGained(FocusEvent e): void&#xa;+ focusLost(FocusEvent e): void&#xa;+ getText(): String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="-Fn23PZzocksT9DnSk9b-10" vertex="1">
-          <mxGeometry y="78" width="220" height="72" as="geometry" />
         </mxCell>
         <mxCell id="-Fn23PZzocksT9DnSk9b-14" value="Menu" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
           <mxGeometry x="-50.000000000000114" y="858" width="200.14" height="140" as="geometry" />
