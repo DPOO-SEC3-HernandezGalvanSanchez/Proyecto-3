@@ -1,0 +1,12 @@
+PROY,ProyectoPrueba2,descripcionP2,Documentacion;Implementacion;Pruebas,01/02/2022,31/12/2024,loginE2;NombreE2 ApellidoE2
+ACT,Documentacion,A1P2,descripcionA1P2A,01/02/2022,10:00,10:55,loginE2;NombreE2 ApellidoE2,ProyectoPrueba2
+ACT,Implementacion,A1P2,descripcionA1P2B,05/02/2022,9:35,11:00,loginE2;NombreE2 ApellidoE2,ProyectoPrueba2
+ACT,Implementacion,A2P2,descripcionA2P2A,08/02/2022,18:25,19:15,loginE2;NombreE2 ApellidoE2,ProyectoPrueba2
+ACT,Pruebas,A2P2,descripcionA2P2B,01/03/2022,15:00,16:10,loginE2;NombreE2 ApellidoE2,ProyectoPrueba2
+PROY,ProyectoPrueba1,descripcionP1,Documentacion;Implementacion;Pruebas,01/01/2021,31/12/2023,loginE2;NombreE2 ApellidoE2,loginE1;NombreE1 ApellidoE1
+ACT,Implementacion,A2P1,descripcionA2P1A,05/01/2021,12:00,14:15,loginE2;NombreE2 ApellidoE2,ProyectoPrueba1
+ACT,Pruebas,A2P1,descripcionA2P1B,01/04/2021,10:00,11:40,loginE2;NombreE2 ApellidoE2,ProyectoPrueba1
+ACT,Documentacion,A3P1,descripcionA3P1,01/10/2021,7:40,11:00,loginE2;NombreE2 ApellidoE2,ProyectoPrueba1
+ACT,Documentacion,A1P1,descripcionA1P1A,01/01/2021,12:30,18:15,loginE1;NombreE1 ApellidoE1,ProyectoPrueba1
+ACT,Documentacion,A1P1,descripcionA1P1B,15/02/2021,8:00,8:30,loginE1;NombreE1 ApellidoE1,ProyectoPrueba1
+ACT,Documentacion,A1P1,descripcionA1P1C,17/03/2021,9:15,17:00,loginE1;NombreE1 ApellidoE1,ProyectoPrueba1
