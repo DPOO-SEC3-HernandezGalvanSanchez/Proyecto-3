@@ -90,13 +90,24 @@ public class CoordinadorProyecto
 	
 	// METODOS DE LAS ACTIVIDADES
 	public void registrarActividad(String tipoActividad, String titulo, String descripcion, String fecha,
-								   String horaInicio, String horaFin, Participante participante)
+								   String horaInicio, String horaFin, Participante participante, Tarea tarea)
 	{
-		Actividad nuevaActividad = new ProxyRegistro(tipoActividad, titulo, descripcion, fecha,
-												 	 horaInicio, horaFin, participante, "", false);
+		try
+		{
+			Actividad proxy1 = new ProxyRegistro(tipoActividad, titulo, descripcion, fecha,
+					 							 horaInicio, horaFin, participante, false);
+			Actividad proxy2 = new ProxyRegistro(tipoActividad, titulo, descripcion, fecha,
+					 							 horaInicio, horaFin, participante, false);
+
+			proyectoEnUso.registrarActividad(proxy1, proxy2, tarea);
+			archivoProyectos.guardarInfoProyecto(proyectoEnUso);
+		}
 		
-		proyectoEnUso.registrarActividad(nuevaActividad);
-		archivoProyectos.guardarInfoProyecto(proyectoEnUso);
+		catch (Exception e)
+		{
+			//COMPLETAR
+		}
+		
 	}
 
 	

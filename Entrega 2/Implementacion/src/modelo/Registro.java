@@ -10,13 +10,14 @@ public class Registro implements Actividad
 	private String horaInicio;
 	private String horaFin;
 	private Participante autor;
+	private boolean cierraTarea;
 	private int tiempo;
 	
 	
 	//CONSTRUCTOR
 	public Registro(String tipoActividad, String titulo, String descripcion,
 					String fecha, String horaInicio, String horaFin,
-					Participante autor, String nombreTarea, boolean cierraTarea)
+					Participante autor, boolean cierraTarea)
 	{
 		this.tipoActividad = tipoActividad;
 		this.titulo = titulo;
@@ -25,6 +26,7 @@ public class Registro implements Actividad
 		this.horaInicio = horaInicio;
 		this.horaFin = horaFin;
 		this.autor = autor;
+		this.cierraTarea = cierraTarea;
 		this.tiempo = calcularTiempo(horaInicio,horaFin);
 	}
 	
@@ -35,47 +37,45 @@ public class Registro implements Actividad
 		return tipoActividad;
 	}
 
-
 	public String getTitulo()
 	{
 		return titulo;
 	}
-
 
 	public String getDescripcion()
 	{
 		return descripcion;
 	}
 
-
 	public String getFecha()
 	{
 		return fecha;
 	}
-	
 	
 	public String getHoraInicio()
 	{
 		return horaInicio;
 	}
 
-
 	public String getHoraFin()
 	{
 		return horaFin;
 	}
-
 
 	public Participante getAutor()
 	{
 		return autor;
 	}
 	
-	
 	public int getTiempo()
 	{
 		return tiempo;
 	}
+	
+	public boolean getCierraTarea()
+	{
+		return cierraTarea;
+	}	
 	
 	
 	//SETTERS

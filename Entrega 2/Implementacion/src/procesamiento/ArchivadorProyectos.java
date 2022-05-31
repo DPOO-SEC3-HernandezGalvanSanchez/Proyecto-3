@@ -11,9 +11,11 @@ import java.util.*;
 
 import modelo.Actividad;
 import modelo.GestorActividades;
+import modelo.PaqueteDeTrabajo;
 import modelo.Participante;
 import modelo.ProxyRegistro;
 import modelo.Proyecto;
+import modelo.Tarea;
 
 
 public class ArchivadorProyectos
@@ -45,8 +47,11 @@ public class ArchivadorProyectos
 	// CARGA DEL ARCHIVO	
 	private void cargarProyectos() throws FileNotFoundException, IOException
 	{
-		BufferedReader br = new BufferedReader(new FileReader("./data/proyectos.txt", StandardCharsets.UTF_8));
+		BufferedReader br = new BufferedReader(new FileReader("./data/proyectos_nuevo.txt", StandardCharsets.UTF_8));
 		String linea = br.readLine();
+		Proyecto proyectoActual = null;
+		PaqueteDeTrabajo paqueteActual = null;
+		Tarea tareaActual = null;
 		
 		while (linea != null)
 		{
@@ -54,28 +59,21 @@ public class ArchivadorProyectos
 			
 			if (partes[0].equals("PROY"))
 			{
-				cargarUnProyecto(partes);
+				proyectoActual = cargarUnProyecto(partes);
+				paqueteActual = proyectoActual.getWBS();
+			}
+			
+			else if (partes[0].equals("TAR"))
+			{
+				tareaActual = cargarUnaTarea(partes);
+				paqueteActual.agregarTarea(tareaActual);
 			}
 			
 			else if (partes[0].equals("ACT"))
 			{
-				String tipoActividad = partes[1];
-				String titulo = partes[2];
-				String descripcion = partes[3];
-				String fecha = partes[4];
-				String horaInicio = partes[5];
-				String horaFin = partes[6];
-				String[] datosAutor = partes[7].split(";");
-				Participante autor = new Participante(datosAutor[0], datosAutor[1]);
-				String tituloProyecto = partes[8];
-				Proyecto elProyecto = catalogoProyectos.get(tituloProyecto); //El proyecto tiene que existir
-				
-				Actividad nuevaActividad = new ProxyRegistro(tipoActividad, titulo, descripcion,
-						 								     fecha, horaInicio, horaFin, autor, "", false);
-				
-				elProyecto.registrarActividad(nuevaActividad);
-				
+				cargarUnaActividad(partes, tareaActual);
 			}
+			
 			linea = br.readLine();
 		}
 		br.close();
@@ -83,7 +81,7 @@ public class ArchivadorProyectos
 	}
 
 	
-	private void cargarUnProyecto(String[] partes)
+	private Proyecto cargarUnProyecto(String[] partes)
 	{
 		String titulo = partes[1];
 		String descripcion = partes[2];
@@ -108,6 +106,63 @@ public class ArchivadorProyectos
 			}
 		}
 		catalogoProyectos.put(titulo, proyectoActual);
+		
+		return proyectoActual;
+	}
+	
+	
+	private Tarea cargarUnaTarea(String[] partes)
+	{
+		String nombreTarea = partes[1];
+		String descripcion = partes[2];
+		String tipoTarea = partes[3];
+		String fechaEstimadaFin = partes[4];
+		int tiempoEstimado = Integer.parseInt(partes[5]);
+		ArrayList<Participante> responsables = new ArrayList<Participante>();
+		
+		for (int i=6; i<partes.length; i++)
+		{
+			String[] datosParticipante = partes[i].split(";");
+			Participante participante = new Participante(datosParticipante[0], datosParticipante[1]);
+			responsables.add(participante);
+		}
+		
+		Tarea tarea = new Tarea(nombreTarea, descripcion, tipoTarea,
+								fechaEstimadaFin, tiempoEstimado, responsables);
+	
+		return tarea;
+	}
+	
+	
+	private void cargarUnaActividad(String[] partes, Tarea tarea)
+	{
+		try
+		{
+			String tipoActividad = partes[1];
+			String titulo = partes[2];
+			String descripcion = partes[3];
+			String fecha = partes[4];
+			String horaInicio = partes[5];
+			String horaFin = partes[6];
+			String[] datosAutor = partes[7].split(";");
+			Participante autor = new Participante(datosAutor[0], datosAutor[1]);
+			String tituloProyecto = partes[8];
+			boolean cierraTarea = Boolean.parseBoolean(partes[9]);
+			Proyecto elProyecto = catalogoProyectos.get(tituloProyecto); //El proyecto tiene que existir
+			
+			Actividad proxy1 = new ProxyRegistro(tipoActividad, titulo, descripcion,
+					 							 fecha, horaInicio, horaFin, autor, cierraTarea);
+			Actividad proxy2 = new ProxyRegistro(tipoActividad, titulo, descripcion,
+					 							 fecha, horaInicio, horaFin, autor, cierraTarea);
+			
+			elProyecto.registrarActividad(proxy1, proxy2, tarea);
+		}
+		
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
 	}
 
 	

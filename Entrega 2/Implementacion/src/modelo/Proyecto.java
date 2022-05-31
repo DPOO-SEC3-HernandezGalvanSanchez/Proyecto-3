@@ -11,27 +11,36 @@ public abstract class Proyecto
 	private String descripcion;
 	private String fechaInicio;
 	private String fechaFin;
-	private ArrayList<String> tiposActividades;
+	private ArrayList<String> tiposTareas;
 	
 	private HashMap<String, Participante> participantes = new HashMap<String, Participante>();
 	protected HashMap<String, ArrayList<Actividad>> actividades = new HashMap<String, ArrayList<Actividad>>();
+	private PaqueteDeTrabajo WBS;
 	
 	
 	// CONSTRUCTOR
 	public Proyecto(String nombreProyecto, String descripcion, String fechaInicio,
-					String fechaFin, ArrayList<String> tiposActividades, Participante autor)
+					String fechaFin, ArrayList<String> tiposTareas, Participante autor)
 	{
 		this.nombreProyecto = nombreProyecto;
 		this.descripcion = descripcion;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
-		this.tiposActividades = tiposActividades;
+		this.tiposTareas = tiposTareas;
+		this.WBS = new PaqueteDeTrabajo("WBS_" + nombreProyecto,
+				   	   "Work Breakdown Structure del proyecto " + nombreProyecto);
 		
 		agregarParticipante(autor);
 	}
 	
 	
 	// METODOS DEL PROYECTO
+	public PaqueteDeTrabajo getWBS()
+	{
+		return WBS;
+	}
+	
+	
 	public String getNombre()
 	{
 		return nombreProyecto;
@@ -58,7 +67,7 @@ public abstract class Proyecto
 
 	public ArrayList<String> getTiposActividades()
 	{
-		ArrayList<String> tiposCopia = new ArrayList<String>(tiposActividades);
+		ArrayList<String> tiposCopia = new ArrayList<String>(tiposTareas);
 		return tiposCopia;
 	}
 
@@ -85,7 +94,7 @@ public abstract class Proyecto
 	
 	
 	// METODOS PARA GESTIONAR ACTIVIDADES
-	public abstract void registrarActividad(Actividad nuevaActividad);
+	public abstract void registrarActividad(Actividad proxy1, Actividad proxy2, Tarea tarea) throws Exception;
 	
 	public abstract void modificarFechaActividad(String titulo, int index, String nuevaFecha);
 

@@ -14,9 +14,11 @@ public class GestorActividades extends Proyecto
 	
 	
 	// METODOS
-	public void registrarActividad(Actividad nuevaActividad)
+	public void registrarActividad(Actividad proxy1, Actividad proxy2, Tarea tarea) throws Exception
 	{
-		String titulo = nuevaActividad.getTitulo();
+		tarea.agregarActividad(proxy1);
+		
+		String titulo = proxy2.getTitulo();
 		ArrayList<Actividad> homonimas = actividades.get(titulo);
 		
 		if (homonimas == null)
@@ -24,7 +26,7 @@ public class GestorActividades extends Proyecto
 			homonimas = new ArrayList<Actividad>();
 		}
 		
-		homonimas.add(nuevaActividad);
+		homonimas.add(proxy2);
 		actividades.put(titulo, homonimas);		
 	}
 

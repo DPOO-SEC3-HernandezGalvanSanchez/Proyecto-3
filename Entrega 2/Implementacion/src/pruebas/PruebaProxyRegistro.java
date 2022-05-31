@@ -12,14 +12,14 @@ public class PruebaProxyRegistro
 		//Actividades de prueba
 		Participante autor1 = new Participante("login1", "nombre1");
 		Actividad a1 = new ProxyRegistro("tipo1", "A1", "descA1", "30/05/2022",
-					       			"08:00", "09:00", autor1, "tarea1", false);
+					       			"08:00", "09:00", autor1, false);
 	
 		Participante autor2 = new Participante("login2", "nombre2");
 		Actividad a2 = new ProxyRegistro("tipo2", "A2", "descA2", "31/05/2022",
-					       			"08:00", "11:00", autor2, "tarea2", false);
+					       			"08:00", "11:00", autor2, false);
 	
 		Actividad a1Copy = new ProxyRegistro("tipo3", "A1", "descA1", "30/05/2022",
-       									"08:00", "09:00", autor1, "tarea1", false);
+       									"08:00", "09:00", autor1, false);
 	
 	
 		//Probar

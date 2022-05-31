@@ -6,7 +6,7 @@ public class ProxyRegistro implements Actividad
 	
 	public ProxyRegistro(String tipoActividad, String titulo, String descripcion,
 						 String fecha, String horaInicio, String horaFin,
-						 Participante autor, String nombreTarea, boolean cierraTarea)
+						 Participante autor, boolean cierraTarea)
 	{
 		String idActividad = generarID(titulo, fecha, horaInicio, horaFin, autor);
 		AlmacenActividades almacen = AlmacenActividades.getInstance();
@@ -15,8 +15,7 @@ public class ProxyRegistro implements Actividad
 		if (elRegistro == null)
 		{
 			elRegistro = new Registro(tipoActividad, titulo, descripcion, fecha,
-									  horaInicio, horaFin, autor, nombreTarea,
-									  cierraTarea);
+									  horaInicio, horaFin, autor, cierraTarea);
 			
 			almacen.guardarRegistro(idActividad, elRegistro);
 		}
@@ -62,6 +61,11 @@ public class ProxyRegistro implements Actividad
 	public int getTiempo()
 	{
 		return elRegistro.getTiempo();
+	}
+	
+	public boolean getCierraTarea()
+	{
+		return elRegistro.getCierraTarea();
 	}
 	
 	public void setFecha(String nuevaFecha)
