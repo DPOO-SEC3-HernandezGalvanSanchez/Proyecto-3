@@ -32,6 +32,26 @@ public class WBS
 		padre.agregarTarea(tarea);
 	}
 	
+	public boolean paqueteEsBorrable(int indexPaquete)
+	{
+		PaqueteDeTrabajo paquete = listaPaquetes.get(indexPaquete);
+		
+		for (Tarea tarea : paquete.getTareas())
+		{
+			if (!tarea.esBorrable())
+			{
+				return false;
+			}
+		}
+		
+		for (int indexSubPaquete : paquete.getSubPaquetes())
+		{
+			return paqueteEsBorrable(indexSubPaquete);
+		}
+		
+		return true;
+	}
+	
 	public PaqueteDeTrabajo getPaquete(int index)
 	{
 		return listaPaquetes.get(index);

@@ -59,4 +59,10 @@ public class PaqueteDeTrabajo
 	{
 		return tareas.get(tituloTarea);
 	}
+	
+	public ArrayList<Tarea> getTareas()
+	{
+		ArrayList<Tarea> listaTareas = new ArrayList<Tarea>(tareas.values());
+		return listaTareas;
+	}
 }

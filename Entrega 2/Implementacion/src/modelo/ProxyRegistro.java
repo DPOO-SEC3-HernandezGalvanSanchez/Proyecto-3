@@ -63,9 +63,9 @@ public class ProxyRegistro implements Actividad
 		return elRegistro.getTiempo();
 	}
 	
-	public boolean getCierraTarea()
+	public boolean cierraTarea()
 	{
-		return elRegistro.getCierraTarea();
+		return elRegistro.cierraTarea();
 	}
 	
 	public void setFecha(String nuevaFecha)

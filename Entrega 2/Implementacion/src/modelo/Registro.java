@@ -72,7 +72,7 @@ public class Registro implements Actividad
 		return tiempo;
 	}
 	
-	public boolean getCierraTarea()
+	public boolean cierraTarea()
 	{
 		return cierraTarea;
 	}	

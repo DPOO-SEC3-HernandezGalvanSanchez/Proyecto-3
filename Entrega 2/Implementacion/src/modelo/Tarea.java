@@ -41,8 +41,28 @@ public class Tarea
 		else
 		{
 			actividades.add(actividad);
-			this.finalizada = actividad.getCierraTarea();
+			this.ultimaFechaProgreso = actividad.getFecha();
+			this.finalizada = actividad.cierraTarea();
 		}
+	}
+	
+	
+	public int calcularTiempoReal()
+	{
+		int tiempo = 0;
+		
+		for (Actividad act : actividades)
+		{
+			tiempo += act.getTiempo();
+		}
+		
+		return tiempo;
+	}
+	
+	
+	public boolean esBorrable()
+	{
+		return actividades.size() == 0;
 	}
 	
 	

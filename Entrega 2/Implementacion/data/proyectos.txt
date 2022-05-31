@@ -13,4 +13,3 @@ TAR,Tarea1P2,descripcionT1P2,Implementacion,10/02/2022,2000,0,loginE2;NombreE2 A
 ACT,Implementacion,A1P2,descripcionA1P2,05/02/2022,9:35,11:00,loginE2;NombreE2 ApellidoE2,ProyectoPrueba2,false
 ACT,Implementacion,A2P2,descripcionA2P2,08/02/2022,18:25,19:15,loginE2;NombreE2 ApellidoE2,ProyectoPrueba2,false
 TAR,Tarea2P2,descripcionT2P2,Pruebas,05/03/2022,500,0,loginE2;NombreE2 ApellidoE2
-ACT,Pruebas,A2P2,descripcionA2P2,01/03/2022,15:00,16:10,loginE2;NombreE2 ApellidoE2,ProyectoPrueba2,true

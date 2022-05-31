@@ -45,10 +45,12 @@ public class PanelProyecto2 extends JPanel implements ActionListener
 		botonOpc1.setBounds(50, 40, 200, 30);
 		add(botonOpc1);
 		
+		/*
 		botonOpc2 = new JRadioButton("Registrar una actividad");
 		botonOpc2.setFont(new Font("Bold", Font.PLAIN, 13));
 		botonOpc2.setBounds(50, 70, 200, 30);
 		add(botonOpc2);
+		*/
 		
 		botonOpc3 = new JRadioButton("Modificar un registro");
 		botonOpc3.setFont(new Font("Bold", Font.PLAIN, 13));
@@ -89,10 +91,10 @@ public class PanelProyecto2 extends JPanel implements ActionListener
 				padre.newParticipantSettings();
 			}
 			
-			else if (botonOpc2.isSelected())
+			/*else if (botonOpc2.isSelected())
 			{
 				padre.newActivitySettings();
-			}
+			}*/
 			
 			else if (botonOpc3.isSelected())
 			{

@@ -10,7 +10,7 @@ public interface Actividad
 	public String getHoraFin();
 	public Participante getAutor();
 	public int getTiempo();
-	public boolean getCierraTarea();
+	public boolean cierraTarea();
 	public void setFecha(String nuevaFecha);
 	public void setHoraInicio(String nuevaHoraInicio);
 	public void setHoraFin(String nuevaHoraFin);

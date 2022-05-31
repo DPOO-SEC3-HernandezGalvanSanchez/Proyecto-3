@@ -106,7 +106,7 @@ public class MenuProyecto extends Menu
 		p1.setListaParticipantes(nombres);
 	}
 	
-	
+	/*
 	//AGREGAR ACTIVIDAD
 	public void newActivitySettings()
 	{
@@ -154,7 +154,7 @@ public class MenuProyecto extends Menu
 		coordinadorProyecto.registrarActividad(tipoActividad, titulo, descripcion,
 											   fecha, horaInicio, horaActual, autor);
 	}
-
+	*/
 
 	//MODIFICAR REGISTRO
 	public void elegirTituloRegistro()

@@ -151,8 +151,8 @@ public class DialogRegistrarActividad extends JDialog implements ActionListener,
 		
 		else
 		{
-			padre.agregarActividad(tipo, titulo, descripcion,
-								   horaI, loginAutor);
+			//padre.agregarActividad(tipo, titulo, descripcion,
+			//					   horaI, loginAutor);
 			this.dispose();
 		}
 	}
