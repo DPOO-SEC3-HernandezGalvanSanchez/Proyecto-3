@@ -12,10 +12,10 @@ public abstract class Proyecto
 	private String fechaInicio;
 	private String fechaFin;
 	private ArrayList<String> tiposTareas;
+	private WBS wbs;
 	
 	private HashMap<String, Participante> participantes = new HashMap<String, Participante>();
 	protected HashMap<String, ArrayList<Actividad>> actividades = new HashMap<String, ArrayList<Actividad>>();
-	private PaqueteDeTrabajo WBS;
 	
 	
 	// CONSTRUCTOR
@@ -27,17 +27,16 @@ public abstract class Proyecto
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.tiposTareas = tiposTareas;
-		this.WBS = new PaqueteDeTrabajo("WBS_" + nombreProyecto,
-				   	   "Work Breakdown Structure del proyecto " + nombreProyecto);
+		this.wbs = new WBS(nombreProyecto);
 		
 		agregarParticipante(autor);
 	}
 	
 	
 	// METODOS DEL PROYECTO
-	public PaqueteDeTrabajo getWBS()
+	public WBS getWBS()
 	{
-		return WBS;
+		return wbs;
 	}
 	
 	

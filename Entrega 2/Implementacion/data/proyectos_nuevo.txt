@@ -1,5 +1,0 @@
-PROY,ProyectoPrueba1,descripcionP1,Documentacion;Implementacion;Pruebas,01/01/2021,31/12/2023,loginE2;NombreE2 ApellidoE2,loginE1;NombreE1 ApellidoE1
-TAR,Tarea1P1,descripcionT1P1,Documentacion,20/03/2021,5000,loginE1;NombreE1 ApellidoE1
-ACT,Documentacion,A1P1,descripcionA1P1A,01/01/2021,12:30,18:15,loginE1;NombreE1 ApellidoE1,ProyectoPrueba1,false
-ACT,Documentacion,A1P1,descripcionA1P1B,15/02/2021,8:00,8:30,loginE1;NombreE1 ApellidoE1,ProyectoPrueba1,false
-ACT,Documentacion,A2P1,descripcionA2P1,17/03/2021,9:15,17:00,loginE1;NombreE1 ApellidoE1,ProyectoPrueba1,true

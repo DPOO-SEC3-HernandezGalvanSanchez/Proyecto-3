@@ -1,26 +1,30 @@
 package modelo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PaqueteDeTrabajo
-{
+{	
 	private String titulo;
 	private String descripcion;
-	private HashMap<String, PaqueteDeTrabajo> subPaquetes;
+	private int indexPadre;
+	private ArrayList<Integer> subPaquetes;
 	private HashMap<String, Tarea> tareas;
 	
 	
-	public PaqueteDeTrabajo(String titulo, String descripcion)
+	public PaqueteDeTrabajo(String titulo, String descripcion,
+							int indexPadre)
 	{
 		this.titulo = titulo;
 		this.descripcion = descripcion;
-		this.subPaquetes  = new HashMap<String, PaqueteDeTrabajo>();
+		this.indexPadre = indexPadre;
+		this.subPaquetes  = new ArrayList<Integer>();
 		this.tareas  = new HashMap<String, Tarea>();
 	}
 	
-	public void agregarSubPaquete(PaqueteDeTrabajo paquete)
+	public void agregarSubPaquete(int indexHijo)
 	{
-		subPaquetes.put(paquete.getTitulo(), paquete);
+		subPaquetes.add(indexHijo);
 	}
 	
 	public void agregarTarea(Tarea tarea)
@@ -40,9 +44,15 @@ public class PaqueteDeTrabajo
 		return descripcion;
 	}
 	
-	public PaqueteDeTrabajo getSubPaquete(String tituloSubPaquete)
+	public int getIndexPadre()
 	{
-		return subPaquetes.get(tituloSubPaquete);
+		return indexPadre;
+	}
+	
+	public ArrayList<Integer> getSubPaquetes()
+	{
+		ArrayList<Integer> copia = new ArrayList<Integer>(subPaquetes);
+		return copia;
 	}
 	
 	public Tarea getTarea(String tituloTarea)

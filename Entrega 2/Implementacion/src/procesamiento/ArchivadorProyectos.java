@@ -16,6 +16,7 @@ import modelo.Participante;
 import modelo.ProxyRegistro;
 import modelo.Proyecto;
 import modelo.Tarea;
+import modelo.WBS;
 
 
 public class ArchivadorProyectos
@@ -47,10 +48,9 @@ public class ArchivadorProyectos
 	// CARGA DEL ARCHIVO	
 	private void cargarProyectos() throws FileNotFoundException, IOException
 	{
-		BufferedReader br = new BufferedReader(new FileReader("./data/proyectos_nuevo.txt", StandardCharsets.UTF_8));
+		BufferedReader br = new BufferedReader(new FileReader("./data/proyectos.txt", StandardCharsets.UTF_8));
 		String linea = br.readLine();
-		Proyecto proyectoActual = null;
-		PaqueteDeTrabajo paqueteActual = null;
+		WBS wbsActual = null;
 		Tarea tareaActual = null;
 		
 		while (linea != null)
@@ -59,14 +59,20 @@ public class ArchivadorProyectos
 			
 			if (partes[0].equals("PROY"))
 			{
-				proyectoActual = cargarUnProyecto(partes);
-				paqueteActual = proyectoActual.getWBS();
+				Proyecto proyectoActual = cargarUnProyecto(partes);
+				wbsActual = proyectoActual.getWBS();
+			}
+			
+			else if (partes[0].equals("PQT"))
+			{
+				PaqueteDeTrabajo paquete = cargarUnPaquete(partes);
+				wbsActual.agregarPaquete(paquete);
 			}
 			
 			else if (partes[0].equals("TAR"))
 			{
 				tareaActual = cargarUnaTarea(partes);
-				paqueteActual.agregarTarea(tareaActual);
+				wbsActual.agregarTarea(tareaActual);
 			}
 			
 			else if (partes[0].equals("ACT"))
@@ -111,6 +117,18 @@ public class ArchivadorProyectos
 	}
 	
 	
+	private PaqueteDeTrabajo cargarUnPaquete(String[] partes)
+	{
+		String titulo = partes[1];
+		String descripcion = partes[2];
+		int indexPadre = Integer.parseInt(partes[3]);
+		
+		PaqueteDeTrabajo paquete = new PaqueteDeTrabajo(titulo, descripcion, indexPadre);
+	
+		return paquete;
+	}
+	
+	
 	private Tarea cargarUnaTarea(String[] partes)
 	{
 		String nombreTarea = partes[1];
@@ -118,17 +136,18 @@ public class ArchivadorProyectos
 		String tipoTarea = partes[3];
 		String fechaEstimadaFin = partes[4];
 		int tiempoEstimado = Integer.parseInt(partes[5]);
+		int indexPadre = Integer.parseInt(partes[6]);
 		ArrayList<Participante> responsables = new ArrayList<Participante>();
 		
-		for (int i=6; i<partes.length; i++)
+		for (int i=7; i<partes.length; i++)
 		{
 			String[] datosParticipante = partes[i].split(";");
 			Participante participante = new Participante(datosParticipante[0], datosParticipante[1]);
 			responsables.add(participante);
 		}
 		
-		Tarea tarea = new Tarea(nombreTarea, descripcion, tipoTarea,
-								fechaEstimadaFin, tiempoEstimado, responsables);
+		Tarea tarea = new Tarea(nombreTarea, descripcion, tipoTarea, fechaEstimadaFin,
+								tiempoEstimado, indexPadre, responsables);
 	
 		return tarea;
 	}

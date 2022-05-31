@@ -10,13 +10,14 @@ public class Tarea
 	private String fechaEstimadaFin;
 	private String ultimaFechaProgreso;
 	private int tiempoEstimado;
+	private int indexPadre;
 	private boolean finalizada;
 	private ArrayList<Actividad> actividades;
 	private ArrayList<Participante> responsables;
 	
 	
 	public Tarea(String nombreTarea, String descripcion, String tipoTarea,
-				 String fechaEstimadaFin, int tiempoEstimado,
+				 String fechaEstimadaFin, int tiempoEstimado, int indexPadre,
 				 ArrayList<Participante> responsables)
 	{
 		this.nombreTarea = nombreTarea;
@@ -24,6 +25,7 @@ public class Tarea
 		this.tipoTarea = tipoTarea;
 		this.fechaEstimadaFin = fechaEstimadaFin;
 		this.tiempoEstimado = tiempoEstimado;
+		this.indexPadre = indexPadre;
 		this.finalizada = false;
 		this.actividades = new ArrayList<Actividad>();
 		this.responsables = responsables;
@@ -45,6 +47,12 @@ public class Tarea
 	
 	
 	//GETTERS
+	public ArrayList<Actividad> getActividades()
+	{
+		ArrayList<Actividad> copia = new ArrayList<Actividad>(actividades);
+		return copia;
+	}
+	
 	public String getNombreTarea()
 	{
 		return nombreTarea;
@@ -75,4 +83,8 @@ public class Tarea
 		return tiempoEstimado;
 	}
 	
+	public int getIndexPadre()
+	{
+		return indexPadre;
+	}
 }
