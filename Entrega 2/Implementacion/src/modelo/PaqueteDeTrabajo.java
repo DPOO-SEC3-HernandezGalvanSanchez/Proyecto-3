@@ -32,6 +32,28 @@ public class PaqueteDeTrabajo
 		tareas.put(tarea.getNombreTarea(), tarea);
 	}
 	
+	public void borrarTarea(String nombreTarea) throws Exception
+	{
+		Tarea laTarea = tareas.get(nombreTarea);
+		
+		if (laTarea != null)
+		{
+			if (laTarea.esBorrable())
+			{
+				tareas.remove(nombreTarea);
+			}
+			else
+			{
+				throw new Exception("La tarea no es borrable");
+			}
+		}
+		
+		else
+		{
+			throw new Exception("No existe una tarea con tal nombre en el paquete");
+		}
+	}
+	
 	
 	//GETTERS
 	public String getTitulo()

@@ -7,6 +7,7 @@ public class WBS
 	private int numPaquetes = 1;
 	private ArrayList<PaqueteDeTrabajo> listaPaquetes;
 	
+	//CONSTRUCTOR
 	public WBS(String nombreProyecto)
 	{
 		listaPaquetes = new ArrayList<PaqueteDeTrabajo>();
@@ -17,14 +18,21 @@ public class WBS
 		listaPaquetes.add(mainWBS);
 	}
 	
+	
+	//AGREGAR Y BORRAR
 	public void agregarPaquete(PaqueteDeTrabajo paquete)
 	{
-		PaqueteDeTrabajo padre = listaPaquetes.get(paquete.getIndexPadre());
-		padre.agregarSubPaquete(numPaquetes);
+		if (!paquete.getIndexPadre().equals(-2)) //-2 es para paquetes vacios
+		{
+			PaqueteDeTrabajo padre = listaPaquetes.get(paquete.getIndexPadre());
+			padre.agregarSubPaquete(numPaquetes);
+		}
 		
 		listaPaquetes.add(paquete);
 		numPaquetes++;
+	
 	}
+	
 	
 	public void agregarTarea(Tarea tarea)
 	{
@@ -32,7 +40,35 @@ public class WBS
 		padre.agregarTarea(tarea);
 	}
 	
-	public boolean paqueteEsBorrable(int indexPaquete)
+	
+	public void borrarPaquete(int indexPaquete) throws Exception
+	{	
+		/*
+		 * Reemplaza el paquete por un paquete vacio.
+		 * No se borra del todo para conservar orden de los indices
+		 */
+		
+		if (paqueteEsBorrable(indexPaquete))
+		{
+			PaqueteDeTrabajo paqueteVacio = new PaqueteDeTrabajo("PaqueteVacio", "", -2);
+			listaPaquetes.set(indexPaquete, paqueteVacio);
+		}
+		
+		else
+		{
+			throw new Exception("El paquete no es borrable");
+		}
+	}
+	
+	
+	public void borrarTarea(int indexPaquete, String nombreTarea) throws Exception
+	{
+		PaqueteDeTrabajo elPaquete = listaPaquetes.get(indexPaquete);
+		elPaquete.borrarTarea(nombreTarea);
+	}
+	
+	
+	private boolean paqueteEsBorrable(int indexPaquete)
 	{
 		PaqueteDeTrabajo paquete = listaPaquetes.get(indexPaquete);
 		
@@ -51,6 +87,7 @@ public class WBS
 		
 		return true;
 	}
+	
 	
 	//GETTERS
 	public PaqueteDeTrabajo getPaquete(int index)
