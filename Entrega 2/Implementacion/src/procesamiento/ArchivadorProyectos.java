@@ -169,9 +169,9 @@ public class ArchivadorProyectos
 			boolean cierraTarea = Boolean.parseBoolean(partes[9]);
 			Proyecto elProyecto = catalogoProyectos.get(tituloProyecto); //El proyecto tiene que existir
 			
-			Actividad proxy1 = new ProxyRegistro(tipoActividad, titulo, descripcion,
+			Actividad proxy1 = new ProxyRegistro(tituloProyecto, tipoActividad, titulo, descripcion,
 					 							 fecha, horaInicio, horaFin, autor, cierraTarea);
-			Actividad proxy2 = new ProxyRegistro(tipoActividad, titulo, descripcion,
+			Actividad proxy2 = new ProxyRegistro(tituloProyecto, tipoActividad, titulo, descripcion,
 					 							 fecha, horaInicio, horaFin, autor, cierraTarea);
 			
 			elProyecto.registrarActividad(proxy1, proxy2, tarea);
@@ -278,41 +278,46 @@ public class ArchivadorProyectos
 			// LINEA DEL PROYECTO
 			String tituloProyecto = i.next();
 			Proyecto elProyecto = catalogoProyectos.get(tituloProyecto);
-			String descripcion = elProyecto.getDescripcion();
-			String lineaP = "PROY," + tituloProyecto + "," + descripcion; 
-			
-			ArrayList<String> tiposActividades = elProyecto.getTiposActividades();
-			String tiposActividadesStr = tiposActividades.get(0);
-			
-			for (int index=1; index<tiposActividades.size(); index++)
-			{
-				tiposActividadesStr += ";" + tiposActividades.get(index);
-			}
-			
-			lineaP += "," + tiposActividadesStr;
-			
-			String fechaInicio = elProyecto.getFechaInicio();
-			String fechaFin = elProyecto.getFechaFin();
-			
-			lineaP += "," + fechaInicio + "," + fechaFin;
-			
-			HashMap<String, Participante> participantes = elProyecto.getParticipantes();
-			Iterator<String> j = participantes.keySet().iterator();
-			
-			while(j.hasNext())
-			{
-				String login = j.next();
-				Participante elParticipante = participantes.get(login);
-				String nombre = elParticipante.getNombre();
-				lineaP += "," + login + ";" + nombre;
-			}
-			
+			String lineaP = guardarUnProyecto(elProyecto);
 			fw.write(lineaP);
 			fw.newLine();
 			
+			//LINEAS DE LOS PAQUETES
+			WBS wbs = elProyecto.getWBS();
+			ArrayList<PaqueteDeTrabajo> listaPaquetes = wbs.getListaPaquetes();
+			ArrayList<Tarea> lasTareas = new ArrayList<Tarea>();
 			
-			//LINEAS DE LAS ACTIVIDADES
-			HashMap<String, ArrayList<Actividad>> actividades = elProyecto.getActividades();
+			for (PaqueteDeTrabajo paquete : listaPaquetes)
+			{
+				ArrayList<Tarea> tareasPaquete = paquete.getTareas();
+				lasTareas.addAll(tareasPaquete);
+				
+				if (!paquete.getIndexPadre().equals(-1))
+				{
+					String lineaPq = guardarUnPaquete(paquete);
+					fw.write(lineaPq);
+					fw.newLine();
+				}
+			}
+			
+			//LINEAS DE LAS TAREAS
+			for (Tarea tarea : lasTareas)
+			{
+				String lineaT = guardarUnaTarea(tarea);
+				fw.write(lineaT);
+				fw.newLine();
+				
+				//LINEAS DE LAS ACTIVIDADES
+				for (Actividad actividad : tarea.getActividades())
+				{
+					String lineaA = guardarUnaActividad(actividad, tituloProyecto);
+					fw.write(lineaA);
+					fw.newLine();
+				}
+			}
+			
+			
+			/*HashMap<String, ArrayList<Actividad>> actividades = elProyecto.getActividades();
 			Iterator<String> k = actividades.keySet().iterator();
 			
 			while(k.hasNext())
@@ -323,35 +328,107 @@ public class ArchivadorProyectos
 				for (int index=0; index<homonimas.size(); index++)
 				{
 					Actividad actividad = homonimas.get(index);
-					String tipoActividad = actividad.getTipoActividad();
-					String descripcionActividad = actividad.getDescripcion();
-					String fechaActividad = actividad.getFecha();
-					String horaInicio = actividad.getHoraInicio();
-					String horaFin = actividad.getHoraFin();
-					Participante autor = actividad.getAutor();
-					String loginAutor = autor.getLogin();
-					String nombreAutor = autor.getNombre();
 					
-					String lineaA = "ACT" + "," + tipoActividad + "," + tituloActividad;
-					lineaA += "," + descripcionActividad + "," + fechaActividad;
-					lineaA += "," + horaInicio + "," + horaFin + ",";
-					lineaA += loginAutor + ";" + nombreAutor + "," + tituloProyecto;
-					
-					fw.write(lineaA);
-					fw.newLine();
 				}
-			}
+			}*/
 		}
 		fw.close();
-
 		
 		}
 		catch (IOException e)
 		{
 			System.err.println("ERROR: hubo un problema generando archivo auxiliar.");
 		}
-		
 	}
 
+	
+	private String guardarUnProyecto(Proyecto elProyecto)
+	{
+		String tituloProyecto = elProyecto.getNombre();
+		String descripcion = elProyecto.getDescripcion();
+		String lineaP = "PROY," + tituloProyecto + "," + descripcion; 
+		
+		ArrayList<String> tiposActividades = elProyecto.getTiposActividades();
+		String tiposActividadesStr = tiposActividades.get(0);
+		
+		for (int index=1; index<tiposActividades.size(); index++)
+		{
+			tiposActividadesStr += ";" + tiposActividades.get(index);
+		}
+		
+		lineaP += "," + tiposActividadesStr;
+		
+		String fechaInicio = elProyecto.getFechaInicio();
+		String fechaFin = elProyecto.getFechaFin();
+		
+		lineaP += "," + fechaInicio + "," + fechaFin;
+		
+		HashMap<String, Participante> participantes = elProyecto.getParticipantes();
+		Iterator<String> j = participantes.keySet().iterator();
+		
+		while(j.hasNext())
+		{
+			String login = j.next();
+			Participante elParticipante = participantes.get(login);
+			String nombre = elParticipante.getNombre();
+			lineaP += "," + login + ";" + nombre;
+		}
+		
+		return lineaP;
+	}
+	
+	
+	private String guardarUnPaquete(PaqueteDeTrabajo paquete)
+	{
+		String lineaPq = "PQT,";
+		lineaPq += paquete.getTitulo() + ",";
+		lineaPq += paquete.getDescripcion() + ",";
+		lineaPq += paquete.getIndexPadre().toString();
+		return lineaPq;
+	}
+	
+	
+	private String guardarUnaTarea(Tarea tarea)
+	{
+		String lineaT = "TAR,";
+		lineaT += tarea.getNombreTarea() + ",";
+		lineaT += tarea.getDescripcion() + ",";
+		lineaT += tarea.getTipoTarea() + ",";
+		lineaT += tarea.getFechaEstimadaFin() + ",";
+		lineaT += tarea.getTiempoEstimado().toString() + ",";
+		lineaT += tarea.getIndexPadre().toString();
+		
+		for (Participante participante : tarea.getResponsables())
+		{
+			String login = participante.getLogin();
+			String nombre = participante.getNombre();
+			lineaT += "," + login + ";" + nombre;
+		}
+		
+		return lineaT;
+	}
+	
+	
+	private String guardarUnaActividad(Actividad actividad, String tituloProyecto)
+	{
+		String tituloActividad = actividad.getTitulo();
+		String tipoActividad = actividad.getTipoActividad();
+		String descripcionActividad = actividad.getDescripcion();
+		String fechaActividad = actividad.getFecha();
+		String horaInicio = actividad.getHoraInicio();
+		String horaFin = actividad.getHoraFin();
+		Participante autor = actividad.getAutor();
+		String loginAutor = autor.getLogin();
+		String nombreAutor = autor.getNombre();
+		Boolean cierraTarea = actividad.cierraTarea();
+		String cierra = cierraTarea.toString();
+		
+		String lineaA = "ACT" + "," + tipoActividad + "," + tituloActividad;
+		lineaA += "," + descripcionActividad + "," + fechaActividad;
+		lineaA += "," + horaInicio + "," + horaFin + ",";
+		lineaA += loginAutor + ";" + nombreAutor + "," + tituloProyecto + "," + cierra;
+		
+		return lineaA;
+	}
 
 }

@@ -44,7 +44,7 @@ public class PaqueteDeTrabajo
 		return descripcion;
 	}
 	
-	public int getIndexPadre()
+	public Integer getIndexPadre()
 	{
 		return indexPadre;
 	}

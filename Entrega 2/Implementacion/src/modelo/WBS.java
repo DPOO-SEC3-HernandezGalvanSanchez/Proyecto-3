@@ -52,9 +52,16 @@ public class WBS
 		return true;
 	}
 	
+	//GETTERS
 	public PaqueteDeTrabajo getPaquete(int index)
 	{
 		return listaPaquetes.get(index);
+	}
+	
+	public ArrayList<PaqueteDeTrabajo> getListaPaquetes()
+	{
+		ArrayList<PaqueteDeTrabajo> copia = new ArrayList<PaqueteDeTrabajo>(listaPaquetes);
+		return copia;
 	}
 	
 }

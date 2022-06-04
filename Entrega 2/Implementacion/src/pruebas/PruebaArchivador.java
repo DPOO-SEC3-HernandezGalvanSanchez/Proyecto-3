@@ -66,5 +66,7 @@ public class PruebaArchivador
 		System.out.println("P1 - 3 " + p1.getWBS().paqueteEsBorrable(3));
 		
 		System.out.println("\nP2 - 0 " + p2.getWBS().paqueteEsBorrable(0));
+		
+		a.guardarInfoProyecto(p1);
 	}
 }

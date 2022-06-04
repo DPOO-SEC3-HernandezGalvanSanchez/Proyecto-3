@@ -94,10 +94,12 @@ public class CoordinadorProyecto
 	{
 		try
 		{
-			Actividad proxy1 = new ProxyRegistro(tipoActividad, titulo, descripcion, fecha,
-					 							 horaInicio, horaFin, participante, false);
-			Actividad proxy2 = new ProxyRegistro(tipoActividad, titulo, descripcion, fecha,
-					 							 horaInicio, horaFin, participante, false);
+			String tituloProyecto = proyectoEnUso.getNombre();
+			
+			Actividad proxy1 = new ProxyRegistro(tituloProyecto, tipoActividad, titulo, descripcion,
+												 fecha, horaInicio, horaFin, participante, false);
+			Actividad proxy2 = new ProxyRegistro(tituloProyecto, tipoActividad, titulo, descripcion,
+					 							 fecha, horaInicio, horaFin, participante, false);
 
 			proyectoEnUso.registrarActividad(proxy1, proxy2, tarea);
 			archivoProyectos.guardarInfoProyecto(proyectoEnUso);

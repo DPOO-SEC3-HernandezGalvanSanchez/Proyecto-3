@@ -4,11 +4,11 @@ public class ProxyRegistro implements Actividad
 {
 	private Registro elRegistro;
 	
-	public ProxyRegistro(String tipoActividad, String titulo, String descripcion,
-						 String fecha, String horaInicio, String horaFin,
+	public ProxyRegistro(String tituloProyecto, String tipoActividad, String titulo,
+						 String descripcion, String fecha, String horaInicio, String horaFin,
 						 Participante autor, boolean cierraTarea)
 	{
-		String idActividad = generarID(titulo, fecha, horaInicio, horaFin, autor);
+		String idActividad = generarID(titulo, fecha, horaInicio, horaFin, tituloProyecto, autor);
 		AlmacenActividades almacen = AlmacenActividades.getInstance();
 		Registro elRegistro = almacen.getRegistro(idActividad);
 		
@@ -84,10 +84,10 @@ public class ProxyRegistro implements Actividad
 	}
 	
 	private String generarID(String titulo, String fecha, String horaInicio,
-							 String horaFin, Participante autor)
+							 String horaFin, String tituloProyecto, Participante autor)
 	{
 		String idActividad = titulo + ";" + fecha + ";" + horaInicio + ";" + horaFin;
-		idActividad += ";" + autor.getLogin();
+		idActividad += ";" + autor.getLogin() + ";" + tituloProyecto;
 		
 		return idActividad;
 	}

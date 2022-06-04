@@ -98,13 +98,18 @@ public class Tarea
 		return ultimaFechaProgreso;
 	}
 
-	public int getTiempoEstimado()
+	public Integer getTiempoEstimado()
 	{
 		return tiempoEstimado;
 	}
 	
-	public int getIndexPadre()
+	public Integer getIndexPadre()
 	{
 		return indexPadre;
+	}
+	
+	public ArrayList<Participante> getResponsables()
+	{
+		return new ArrayList<Participante>(responsables);
 	}
 }
