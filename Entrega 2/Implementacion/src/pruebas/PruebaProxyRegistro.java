@@ -1,7 +1,6 @@
 package pruebas;
 
 import modelo.Actividad;
-import modelo.AlmacenActividades;
 import modelo.Participante;
 import modelo.ProxyRegistro;
 

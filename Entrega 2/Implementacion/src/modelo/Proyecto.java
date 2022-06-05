@@ -27,7 +27,7 @@ public abstract class Proyecto
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.tiposTareas = tiposTareas;
-		this.wbs = new CalculadoraWBS(nombreProyecto);
+		this.wbs = new CalculadoraWBS(this);
 		
 		agregarParticipante(autor);
 	}

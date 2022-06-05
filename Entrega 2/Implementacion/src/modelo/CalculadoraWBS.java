@@ -1,20 +1,14 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CalculadoraWBS extends WBS
 {
 	
-	public CalculadoraWBS(String nombreProyecto)
+	public CalculadoraWBS(Proyecto elProyecto)
 	{
-		super(nombreProyecto);
-	}
-
-	
-	public ReporteAvance calcularAvanceProyecto()
-	{
-		ReporteAvance avance = calcularAvancePaquete(0);	
-		return avance;
+		super(elProyecto);
 	}
 	
 	
@@ -27,7 +21,7 @@ public class CalculadoraWBS extends WBS
 	}
 	
 	
-	public void calcularCalidadPlaneacion()
+	public ReporteCalidadPlaneacion calcularCalidadPlaneacion()
 	{
 		ReporteCalidadPlaneacion calidad = new ReporteCalidadPlaneacion();
 		
@@ -50,17 +44,32 @@ public class CalculadoraWBS extends WBS
 				}
 			}
 		}
+		
+		return calidad;
 	}
 	
 	
-	public void calcularDesempenoEquipo()
+	public ReporteDesempenoEquipo calcularDesempenoEquipo()
 	{
+		HashMap<String, Participante> miembrosEquipo = elProyecto.getParticipantes();
+		ReporteDesempenoEquipo equipo = new ReporteDesempenoEquipo(miembrosEquipo);
+		PaqueteDeTrabajo mainWBS = listaPaquetes.get(0);
+		completarTiempoInvertido(equipo);
+		completarDesempenoTareas(mainWBS, equipo);
 		
+		return equipo;
 	}
 	
-	public void calcularResumenProyecto()
+	
+	public ReporteResumenProyecto calcularResumenProyecto()
 	{
+		PaqueteDeTrabajo mainWBS = listaPaquetes.get(0);
+		ArrayList<String> tipos = elProyecto.getTiposActividades();
+		ReporteResumenProyecto resumen = new ReporteResumenProyecto(tipos);		
+		completarResumenPaquete(mainWBS, resumen);		
+		resumen.avance = calcularAvancePaquete(0);
 		
+		return resumen;
 	}
 	
 	
@@ -95,7 +104,106 @@ public class CalculadoraWBS extends WBS
 			PaqueteDeTrabajo subPaquete = listaPaquetes.get(indexSubPaquete);
 			completarAvancePaquete(subPaquete, avance);
 		}
+	}
+	
+	
+	private void completarTiempoInvertido(ReporteDesempenoEquipo equipo)
+	{
+		/*
+		 * Calcula el tiempo total invertido por cada participante
+		 */
 		
+		HashMap<String, ArrayList<Actividad>> lasActividades = elProyecto.getActividades();
+		ArrayList<String> titulos = new ArrayList<String>(lasActividades.keySet());
+		
+		for (String titulo : titulos)
+		{
+			ArrayList<Actividad> homonimas = lasActividades.get(titulo);
+			for (Actividad actividad : homonimas)
+			{
+				Participante autor = actividad.getAutor();
+				int tiempo = equipo.tiempoInvertido.get(autor.getNombre());
+				tiempo += actividad.getTiempo();
+				
+				equipo.tiempoInvertido.replace(autor.getNombre(), tiempo);
+			}
+		}
+	}
+	
+	
+	private void completarDesempenoTareas(PaqueteDeTrabajo paquete, ReporteDesempenoEquipo equipo)
+	{
+		/*
+		 * Diligencia el reporte con el desempeno en las tareas del paquete
+		 */
+		
+		ArrayList<Tarea> lasTareas = paquete.getTareas();
+		
+		for (Tarea tarea : lasTareas)
+		{			
+			if (!tarea.isFinalizada())
+			{
+				int tiempoInvertido = tarea.calcularTiempoReal();
+				int tiempoPlaneado = tarea.getTiempoEstimado();
+				
+				for (Participante responsable : tarea.getResponsables())
+				{
+					int tareasPendientes = equipo.tareasPendientes.get(responsable.getNombre());
+					int tiempoInvertidoPendientes = equipo.tiempoInvertidoPendientes.get(responsable.getNombre());
+					int tiempoPlaneadoPendientes = equipo.tiempoPlaneadoPendientes.get(responsable.getNombre());
+					
+					tareasPendientes++;
+					tiempoInvertidoPendientes += tiempoInvertido;
+					tiempoPlaneadoPendientes += tiempoPlaneado;
+					
+					equipo.tareasPendientes.replace(responsable.getNombre(), tareasPendientes);
+					equipo.tiempoInvertidoPendientes.replace(responsable.getNombre(), tiempoInvertidoPendientes);
+					equipo.tiempoPlaneadoPendientes.replace(responsable.getNombre(), tiempoPlaneadoPendientes);
+				}
+			}
+			else
+			{
+				for (Participante responsable : tarea.getResponsables())
+				{
+					int tareasTerminadas = equipo.tareasTerminadas.get(responsable.getNombre());
+					equipo.tareasTerminadas.replace(responsable.getNombre(), tareasTerminadas + 1);
+				}
+			}
+		}
+		
+		//Repetir para los subpaquetes
+		for (Integer indexSubPaquete : paquete.getSubPaquetes())
+		{
+			PaqueteDeTrabajo subPaquete = listaPaquetes.get(indexSubPaquete);
+			completarDesempenoTareas(subPaquete, equipo);
+		}
+	}
+	
+	
+	private void completarResumenPaquete(PaqueteDeTrabajo paquete, ReporteResumenProyecto resumen)
+	{
+		ArrayList<Tarea> lasTareas = paquete.getTareas();
+		
+		for (Tarea tarea : lasTareas)
+		{
+			String tipo = tarea.getTipoTarea();
+			int tiempoTipo = resumen.tiempoPorTipo.get(tipo);
+			tiempoTipo += tarea.calcularTiempoReal();
+			resumen.tiempoPorTipo.replace(tipo, tiempoTipo);
+			
+			if (!tarea.isFinalizada())
+			{
+				int pendientesTipo = resumen.pendientesPorTipo.get(tipo);
+				resumen.pendientesPorTipo.replace(tipo, pendientesTipo + 1);
+			}
+		}
+		
+		//Repetir para los subpaquetes
+		for (Integer indexSubPaquete : paquete.getSubPaquetes())
+		{
+			PaqueteDeTrabajo subPaquete = listaPaquetes.get(indexSubPaquete);
+			completarResumenPaquete(subPaquete, resumen);
+		}
 	}
 	
 	

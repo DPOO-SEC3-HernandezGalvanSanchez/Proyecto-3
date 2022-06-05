@@ -5,15 +5,18 @@ import java.util.ArrayList;
 public abstract class WBS
 {
 	private int numPaquetes = 1;
+	protected Proyecto elProyecto;
 	protected ArrayList<PaqueteDeTrabajo> listaPaquetes;
 	
 	//CONSTRUCTOR
-	public WBS(String nombreProyecto)
+	public WBS(Proyecto elProyecto)
 	{
-		listaPaquetes = new ArrayList<PaqueteDeTrabajo>();
-		
+		String nombreProyecto = elProyecto.getNombre();
 		PaqueteDeTrabajo mainWBS = new PaqueteDeTrabajo("WBS_" + nombreProyecto,
 		   	   	  "Work Breakdown Structure del proyecto " + nombreProyecto, -1);
+		
+		this.elProyecto = elProyecto;
+		this.listaPaquetes = new ArrayList<PaqueteDeTrabajo>();
 		
 		listaPaquetes.add(mainWBS);
 	}
@@ -68,11 +71,10 @@ public abstract class WBS
 	}
 	
 	
-	public abstract ReporteAvance calcularAvanceProyecto();
 	public abstract ReporteAvance calcularAvancePaquete(int indexPaquete);
-	public abstract void calcularCalidadPlaneacion();
-	public abstract void calcularDesempenoEquipo();
-	public abstract void calcularResumenProyecto();
+	public abstract ReporteCalidadPlaneacion calcularCalidadPlaneacion();
+	public abstract ReporteDesempenoEquipo calcularDesempenoEquipo();
+	public abstract ReporteResumenProyecto calcularResumenProyecto();
 	
 	
 	//AUXILIAR
@@ -101,6 +103,11 @@ public abstract class WBS
 	public PaqueteDeTrabajo getPaquete(int index)
 	{
 		return listaPaquetes.get(index);
+	}
+	
+	public int getNumPaquetes()
+	{
+		return listaPaquetes.size();
 	}
 	
 	public ArrayList<PaqueteDeTrabajo> getListaPaquetes()
