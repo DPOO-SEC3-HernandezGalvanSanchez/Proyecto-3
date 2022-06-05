@@ -112,4 +112,9 @@ public class Tarea
 	{
 		return new ArrayList<Participante>(responsables);
 	}
+	
+	public boolean isFinalizada()
+	{
+		return finalizada;
+	}
 }

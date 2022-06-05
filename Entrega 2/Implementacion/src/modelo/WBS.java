@@ -2,10 +2,10 @@ package modelo;
 
 import java.util.ArrayList;
 
-public class WBS
+public abstract class WBS
 {
 	private int numPaquetes = 1;
-	private ArrayList<PaqueteDeTrabajo> listaPaquetes;
+	protected ArrayList<PaqueteDeTrabajo> listaPaquetes;
 	
 	//CONSTRUCTOR
 	public WBS(String nombreProyecto)
@@ -19,7 +19,7 @@ public class WBS
 	}
 	
 	
-	//AGREGAR Y BORRAR
+	//FUNCIONALIDADES
 	public void agregarPaquete(PaqueteDeTrabajo paquete)
 	{
 		if (!paquete.getIndexPadre().equals(-2)) //-2 es para paquetes vacios
@@ -68,6 +68,14 @@ public class WBS
 	}
 	
 	
+	public abstract ReporteAvance calcularAvanceProyecto();
+	public abstract ReporteAvance calcularAvancePaquete(int indexPaquete);
+	public abstract void calcularCalidadPlaneacion();
+	public abstract void calcularDesempenoEquipo();
+	public abstract void calcularResumenProyecto();
+	
+	
+	//AUXILIAR
 	private boolean paqueteEsBorrable(int indexPaquete)
 	{
 		PaqueteDeTrabajo paquete = listaPaquetes.get(indexPaquete);
