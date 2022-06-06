@@ -106,6 +106,7 @@ public class PanelWBS2 extends JPanel implements ActionListener
 					if (paquete.getTitulo().equals(titulo))
 					{
 						ReporteAvance avance = wbs.calcularAvancePaquete(i);
+						//new DialogReporteAvance(avance);
 					}
 				}
 			}
@@ -113,11 +114,13 @@ public class PanelWBS2 extends JPanel implements ActionListener
 			else if (botonOpc2.isSelected())
 			{
 				ReporteCalidadPlaneacion calidad = wbs.calcularCalidadPlaneacion();
+				//new DialogReporteCalidadPlaneacion(calidad);
 			}
 			
 			else if (botonOpc3.isSelected())
 			{
 				ReporteDesempenoEquipo equipo = wbs.calcularDesempenoEquipo();
+				//new DialogReporteDesempeno(equipo);
 			}
 			
 			else if (botonOpc4.isSelected())
