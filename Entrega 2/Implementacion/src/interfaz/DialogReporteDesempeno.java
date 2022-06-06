@@ -10,11 +10,13 @@ public class DialogReporteDesempeno extends JDialog {
 	
 	//atributos
 	
+	private ReporteDesempenoEquipo report;
 	
 	
 	
-	public DialogReporteDesempeno(ReporteDesempenoEquipo report)
+	public DialogReporteDesempeno(ReporteDesempenoEquipo reporte)
 	{
+		this.report = reporte;
 		
 	}
 
