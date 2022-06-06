@@ -16,35 +16,16 @@ public class DialogReporteCalidadPlaneacion extends JDialog {
 	private ReporteCalidadPlaneacion report;
 	
 	
-	public DialogReporteCalidadPlaneacion()
+	public DialogReporteCalidadPlaneacion(ReporteCalidadPlaneacion reporte)
 	{
-		//this.report = reporte;
+		this.report = reporte;
 		
 		setLayout(new FlowLayout());
 		
-		//this.add(tiempoChart());
-		//this.add(tareasChart());
+		this.add(tiempoChart());
+		this.add(tareasChart());
 
-		int[] x = new int[] {0, 1, 2, 3, 4};
-		int[] a = new int[] {1, 3, 1, 2, 1};
-		int[] b = new int[] {2, 1, 1, 2, 2};
-		int[] c = new int[] {1, 1, 2, 3, 3};
-		
-		CategoryChart chart = new CategoryChartBuilder().width(640).height(480).build();
-		chart.getStyler().setLegendVisible(false);
-		chart.getStyler().setAvailableSpaceFill(1);
-		
-		AxesChartSeriesCategory axesChartSeries = getSeriesMap().values().iterator().next();
-		
-		chart.addSeries("A", x, a);
-		
-		
-		
-		new SwingWrapper(chart).displayChart();
-		
-		//JPanel Chart = new XChartPanel(chart);
-		
-		//this.add(Chart);
+
 		this.setSize(1250,550);
 		this.setTitle("Reporte Avance del Proyecto");
 		setResizable(false);
@@ -55,13 +36,24 @@ public class DialogReporteCalidadPlaneacion extends JDialog {
 
 	private JPanel tiempoChart()
 	{
-		return new JPanel();
+		CategoryChart chart = new CategoryChartBuilder().width(600).height(500).title("Tareas que cumplen Tiempo").build();
+		chart.getStyler().setLegendVisible(false);
+		chart.getStyler().setAvailableSpaceFill(1);
+		int[] x = new int[] {1,2};
+		int[] a = new int[] {this.report.tareasCumplenTiempo, this.report.totalTareas-this.report.tareasCumplenTiempo};
+		chart.addSeries("A", x, a);
+		JPanel ret = new XChartPanel(chart);
+		
+		return ret;
 	}
 	
-	
-	public static void main(String[] args)
+	private JPanel tareasChart()
 	{
-		DialogReporteCalidadPlaneacion cosa = new DialogReporteCalidadPlaneacion();
+		PieChart chart = new PieChartBuilder().width(600).height(500).title("Tareas").build();
+		chart.addSeries("Tareas terminadas", this.report.tareasCumplenTiempo);
+		chart.addSeries("Tareas sin Terminar",this.report.totalTareas-this.report.tareasCumplenTiempo);
+		JPanel Ret = new XChartPanel(chart);	
+		return Ret;
 	}
 	
 }
