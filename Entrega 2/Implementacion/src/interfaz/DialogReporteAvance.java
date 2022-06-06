@@ -59,8 +59,8 @@ public class DialogReporteAvance extends JDialog{
 	private JPanel TiempoChart()
 	{
 		PieChart chart = new PieChartBuilder().width(600).height(500).title("Tiempo").build();
-		chart.addSeries("Tiempo planeado terminado", this.report.tiempoPlaneadoTerminadas);
-		chart.addSeries("Tareas sin Terminar",this.report.tiempoPlaneadoTotal-this.report.tiempoPlaneadoTerminadas);
+		chart.addSeries("Tiempo planeado terminadas", this.report.tiempoPlaneadoTerminadas);
+		chart.addSeries("Tiempo tareas sin terminar",this.report.tiempoPlaneadoTotal-this.report.tiempoPlaneadoTerminadas);
 		JPanel Ret = new XChartPanel(chart);
 		return Ret;
 	}

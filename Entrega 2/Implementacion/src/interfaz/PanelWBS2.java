@@ -97,7 +97,7 @@ public class PanelWBS2 extends JPanel implements ActionListener
 		{
 			if (botonOpc1.isSelected())
 			{
-				String titulo = JOptionPane.showInputDialog(this, "Ingrese el titulo del paquete");
+				String titulo = JOptionPane.showInputDialog(this, "Ingrese el titulo del paquete", "Paquete2");
 				
 				for (int i=0; i<wbs.getNumPaquetes(); i++)
 				{
@@ -106,7 +106,7 @@ public class PanelWBS2 extends JPanel implements ActionListener
 					if (paquete.getTitulo().equals(titulo))
 					{
 						ReporteAvance avance = wbs.calcularAvancePaquete(i);
-						//new DialogReporteAvance(avance);
+						new DialogReporteAvance(avance);
 					}
 				}
 			}
@@ -114,7 +114,7 @@ public class PanelWBS2 extends JPanel implements ActionListener
 			else if (botonOpc2.isSelected())
 			{
 				ReporteCalidadPlaneacion calidad = wbs.calcularCalidadPlaneacion();
-				//new DialogReporteCalidadPlaneacion(calidad);
+				new DialogReporteCalidadPlaneacion(calidad);
 			}
 			
 			else if (botonOpc3.isSelected())
