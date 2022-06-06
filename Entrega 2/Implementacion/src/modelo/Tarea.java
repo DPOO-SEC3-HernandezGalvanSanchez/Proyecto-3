@@ -66,6 +66,13 @@ public class Tarea
 	}
 	
 	
+	public String toString()
+	{
+		return "T: " + nombreTarea;
+		
+	}
+	
+	
 	//GETTERS
 	public ArrayList<Actividad> getActividades()
 	{

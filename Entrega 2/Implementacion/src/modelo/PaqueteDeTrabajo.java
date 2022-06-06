@@ -8,6 +8,7 @@ public class PaqueteDeTrabajo
 	private String titulo;
 	private String descripcion;
 	private int indexPadre;
+	private int index;
 	private ArrayList<Integer> subPaquetes;
 	private HashMap<String, Tarea> tareas;
 	
@@ -44,7 +45,7 @@ public class PaqueteDeTrabajo
 			}
 			else
 			{
-				throw new Exception("La tarea no es borrable");
+				throw new Exception("La tarea seleccionada no es borrable");
 			}
 		}
 		
@@ -52,6 +53,13 @@ public class PaqueteDeTrabajo
 		{
 			throw new Exception("No existe una tarea con tal nombre en el paquete");
 		}
+	}
+	
+	
+	public String toString()
+	{
+		return "P: " + titulo;
+		
 	}
 	
 	
@@ -64,6 +72,16 @@ public class PaqueteDeTrabajo
 	public String getDescripcion()
 	{
 		return descripcion;
+	}
+	
+	public Integer getIndex()
+	{
+		return index;
+	}
+	
+	public void setIndex(int index)
+	{
+		this.index = index;
 	}
 	
 	public Integer getIndexPadre()

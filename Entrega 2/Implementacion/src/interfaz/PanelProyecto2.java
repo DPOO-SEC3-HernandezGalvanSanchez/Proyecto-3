@@ -45,26 +45,19 @@ public class PanelProyecto2 extends JPanel implements ActionListener
 		botonOpc1.setBounds(50, 40, 200, 30);
 		add(botonOpc1);
 		
-		/*
-		botonOpc2 = new JRadioButton("Registrar una actividad");
-		botonOpc2.setFont(new Font("Bold", Font.PLAIN, 13));
-		botonOpc2.setBounds(50, 70, 200, 30);
-		add(botonOpc2);
-		*/
-		
 		botonOpc3 = new JRadioButton("Modificar un registro");
 		botonOpc3.setFont(new Font("Bold", Font.PLAIN, 13));
-		botonOpc3.setBounds(50, 100, 200, 30);
+		botonOpc3.setBounds(50, 70, 200, 30);
 		add(botonOpc3);
 		
 		botonOpc4 = new JRadioButton("Generar un reporte");
 		botonOpc4.setFont(new Font("Bold", Font.PLAIN, 13));
-		botonOpc4.setBounds(50, 130, 200, 30);
+		botonOpc4.setBounds(50, 100, 200, 30);
 		add(botonOpc4);
 		
 		botonOpc5 = new JRadioButton("Ver calendario");
 		botonOpc5.setFont(new Font("Bold", Font.PLAIN, 13));
-		botonOpc5.setBounds(50, 160, 200, 30);
+		botonOpc5.setBounds(50, 130, 200, 30);
 		add(botonOpc5);
 		
 		ButtonGroup opciones = new ButtonGroup();
@@ -76,7 +69,7 @@ public class PanelProyecto2 extends JPanel implements ActionListener
 		
 		//BOTON ACEPTAR
 		botonAceptar = new JButton("Aceptar");
-		botonAceptar.setBounds(220, 200, 100, 25);
+		botonAceptar.setBounds(220, 180, 100, 25);
 		botonAceptar.addActionListener(this);
 		add(botonAceptar);
 	}

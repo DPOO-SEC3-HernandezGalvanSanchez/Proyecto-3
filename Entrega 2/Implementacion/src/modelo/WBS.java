@@ -31,9 +31,10 @@ public abstract class WBS
 			padre.agregarSubPaquete(numPaquetes);
 		}
 		
+		paquete.setIndex(numPaquetes);
 		listaPaquetes.add(paquete);
 		numPaquetes++;
-	
+		
 	}
 	
 	
@@ -59,13 +60,15 @@ public abstract class WBS
 		
 		else
 		{
-			throw new Exception("El paquete no es borrable");
+			throw new Exception("El paquete seleccionado no es borrable");
 		}
 	}
 	
 	
-	public void borrarTarea(int indexPaquete, String nombreTarea) throws Exception
+	public void borrarTarea(Tarea tarea) throws Exception
 	{
+		int indexPaquete = tarea.getIndexPadre();
+		String nombreTarea = tarea.getNombreTarea();
 		PaqueteDeTrabajo elPaquete = listaPaquetes.get(indexPaquete);
 		elPaquete.borrarTarea(nombreTarea);
 	}
@@ -81,6 +84,11 @@ public abstract class WBS
 	private boolean paqueteEsBorrable(int indexPaquete)
 	{
 		PaqueteDeTrabajo paquete = listaPaquetes.get(indexPaquete);
+		
+		if (paquete.getIndexPadre() == -1)
+		{
+			return false;
+		}
 		
 		for (Tarea tarea : paquete.getTareas())
 		{

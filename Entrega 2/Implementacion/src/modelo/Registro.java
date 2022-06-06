@@ -30,6 +30,12 @@ public class Registro implements Actividad
 		this.tiempo = calcularTiempo(horaInicio,horaFin);
 	}
 	
+	@Override
+	public String toString()
+	{
+		return "A: " + titulo;
+	}
+	
 	
 	//GETTERS
 	public String getTipoActividad()

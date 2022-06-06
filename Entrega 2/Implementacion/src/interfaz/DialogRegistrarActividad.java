@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -18,11 +19,13 @@ import javax.swing.JTextField;
 @SuppressWarnings("serial")
 public class DialogRegistrarActividad extends JDialog implements ActionListener, KeyListener
 {
-	private MenuProyecto padre;
-		
+	
+	private PanelWBSTree padre;
+	private String tipo;
+	
 	private JPanel settingsAct;
-	private JComboBox<String> desplegableT;
 	private JComboBox<String> desplegableA;
+	private JComboBox<String> desplegableC;
 	private JTextField cuadroTitulo;
 	private JTextField cuadroDescripcion;
 	private JTextField cuadroHoraI;
@@ -30,9 +33,10 @@ public class DialogRegistrarActividad extends JDialog implements ActionListener,
 	private JLabel textLabel;
 	
 	
-	public DialogRegistrarActividad(MenuProyecto padre)
-	{
+	public DialogRegistrarActividad(PanelWBSTree padre, String tipo)
+	{	
 		this.padre = padre;
+		this.tipo = tipo;
 		
 		settingsAct = new JPanel();
 		settingsAct.setLayout(null);
@@ -40,18 +44,6 @@ public class DialogRegistrarActividad extends JDialog implements ActionListener,
 		int y = 25;
 		final int x = 220;
 		final int spacing = 40;
-		
-		//Tipo
-		JLabel mensajeTipo = new JLabel("Seleccione el tipo:");
-		mensajeTipo.setBounds(20, y, 150, 30);
-		mensajeTipo.setFont(new Font("Bold", Font.PLAIN, 13));
-		settingsAct.add(mensajeTipo);
-		
-		desplegableT = new JComboBox<String>();
-		desplegableT.addKeyListener(this);
-		desplegableT.setBounds(x, y+4, 170, 23);
-		settingsAct.add(desplegableT);
-		y += spacing;
 		
 		//Autor
 		JLabel mensajeAutor = new JLabel("Seleccione el autor:");
@@ -99,6 +91,20 @@ public class DialogRegistrarActividad extends JDialog implements ActionListener,
 		cuadroHoraI.addKeyListener(this);
 		cuadroHoraI.setBounds(x, y+4, 80, 23);
 		settingsAct.add(cuadroHoraI);
+		y += spacing;
+		
+		//Cierra Tarea
+		JLabel mensajeCierra = new JLabel("Indique si cierra la tarea:");
+		mensajeCierra.setBounds(20, y, 200, 30);
+		mensajeCierra.setFont(new Font("Bold", Font.PLAIN, 13));
+		settingsAct.add(mensajeCierra);
+		
+		desplegableC = new JComboBox<String>();
+		desplegableC.addKeyListener(this);
+		desplegableC.setBounds(x, y+4, 170, 23);
+		desplegableC.addItem("No");
+		desplegableC.addItem("Si");
+		settingsAct.add(desplegableC);
 		
 		//Boton de aceptar
 		botonAceptar = new JButton("Aceptar");
@@ -121,12 +127,6 @@ public class DialogRegistrarActividad extends JDialog implements ActionListener,
 		setResizable(false);
 	}
 	
-	
-	public void addTipoDesplegable(String tipo)
-	{
-		desplegableT.addItem(tipo);
-	}
-	
 	public void addParticipanteDesplegable(String login)
 	{
 		desplegableA.addItem(login);
@@ -136,11 +136,11 @@ public class DialogRegistrarActividad extends JDialog implements ActionListener,
 	//METODOS DE LISTENER
 	private void continuar()
 	{
-		String tipo = desplegableT.getSelectedItem().toString();
 		String loginAutor = desplegableA.getSelectedItem().toString();
 		String titulo = cuadroTitulo.getText();
 		String descripcion = cuadroDescripcion.getText();
 		String horaI = cuadroHoraI.getText();
+		String cierraTarea = desplegableC.getSelectedItem().toString();
 		
 		if (titulo.equals("") || descripcion.equals("")
 				|| horaI.equals(""))
@@ -151,9 +151,24 @@ public class DialogRegistrarActividad extends JDialog implements ActionListener,
 		
 		else
 		{
-			//padre.agregarActividad(tipo, titulo, descripcion,
-			//					   horaI, loginAutor);
-			this.dispose();
+			try
+			{
+				boolean cierra = false;
+				
+				if (cierraTarea.equals("Si"))
+				{
+					cierra = true;
+				}
+				
+				padre.agregarActividad(tipo, titulo, descripcion, horaI, loginAutor, cierra);
+				this.dispose();
+			}
+			catch (Exception e)
+			{
+				this.dispose();
+				JOptionPane.showMessageDialog(this, e.getMessage(), "Error al agregar actividad",
+						  JOptionPane.ERROR_MESSAGE);
+			}								
 		}
 	}
 	
