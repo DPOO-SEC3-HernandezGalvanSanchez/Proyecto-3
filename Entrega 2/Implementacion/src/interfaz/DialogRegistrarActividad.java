@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 public class DialogRegistrarActividad extends JDialog implements ActionListener, KeyListener
 {
 	
-	private PanelWBSTree padre;
+	private PanelWBS1 padre;
 	private String tipo;
 	
 	private JPanel settingsAct;
@@ -33,7 +33,7 @@ public class DialogRegistrarActividad extends JDialog implements ActionListener,
 	private JLabel textLabel;
 	
 	
-	public DialogRegistrarActividad(PanelWBSTree padre, String tipo)
+	public DialogRegistrarActividad(PanelWBS1 padre, String tipo)
 	{	
 		this.padre = padre;
 		this.tipo = tipo;
