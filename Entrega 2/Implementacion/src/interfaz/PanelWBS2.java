@@ -33,8 +33,6 @@ public class PanelWBS2 extends JPanel implements ActionListener
 	private JRadioButton botonOpc3;
 	private JRadioButton botonOpc4;
 	
-	private JLabel textLabel;
-	
 	
 	public PanelWBS2(MenuWBS padre, WBS wbs)
 	{
@@ -79,15 +77,9 @@ public class PanelWBS2 extends JPanel implements ActionListener
 		
 		//BOTON ACEPTAR
 		botonAceptar = new JButton("Aceptar");
-		botonAceptar.setBounds(220, 170, 100, 25);
+		botonAceptar.setBounds(220, 180, 100, 25);
 		botonAceptar.addActionListener(this);
 		add(botonAceptar);
-		
-		//LABEL INFERIOR
-		textLabel = new JLabel("El avance del proyecto completo se puede consultar en 'Resumen del Proyecto'");
-		textLabel.setBounds(40, 210, 600, 20);
-		textLabel.setForeground(new Color(105, 105, 105));;
-		this.add(textLabel);
 	}
 	
 	
@@ -97,7 +89,7 @@ public class PanelWBS2 extends JPanel implements ActionListener
 		{
 			if (botonOpc1.isSelected())
 			{
-				String titulo = JOptionPane.showInputDialog(this, "Ingrese el titulo del paquete");
+				String titulo = JOptionPane.showInputDialog(this, "Ingrese el titulo del paquete", "WBS_ProyectoPrueba1");
 				
 				for (int i=0; i<wbs.getNumPaquetes(); i++)
 				{
@@ -106,7 +98,7 @@ public class PanelWBS2 extends JPanel implements ActionListener
 					if (paquete.getTitulo().equals(titulo))
 					{
 						ReporteAvance avance = wbs.calcularAvancePaquete(i);
-						//new DialogReporteAvance(avance);
+						new DialogReporteAvance(avance);
 					}
 				}
 			}
@@ -114,21 +106,21 @@ public class PanelWBS2 extends JPanel implements ActionListener
 			else if (botonOpc2.isSelected())
 			{
 				ReporteCalidadPlaneacion calidad = wbs.calcularCalidadPlaneacion();
-				//new DialogReporteCalidadPlaneacion(calidad);
+				new DialogReporteCalidadPlaneacion(calidad);
 			}
 			
 			else if (botonOpc3.isSelected())
 			{
 				ReporteDesempenoEquipo equipo = wbs.calcularDesempenoEquipo();
-				//new DialogReporteDesempeno(equipo);
+				new DialogReporteDesempeno(equipo);
 			}
 			
 			else if (botonOpc4.isSelected())
 			{
 				ReporteResumenProyecto resumen = wbs.calcularResumenProyecto();
+				new DialogReporteResumen(resumen);
 			}
 		}
 	}
-	
 	
 }
