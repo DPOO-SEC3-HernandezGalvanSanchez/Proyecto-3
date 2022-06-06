@@ -264,8 +264,6 @@ public class ArchivadorProyectos
 	{
 		/*
 		 * Guarda la informacion del catalogo al archivo
-		 * 
-		 * NOTA: Solo se ejecuta si el usuario elige la opcion "Cerrar Aplicacion"
 		 */
 		
 		try

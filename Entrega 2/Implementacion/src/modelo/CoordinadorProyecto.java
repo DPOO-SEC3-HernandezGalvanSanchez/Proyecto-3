@@ -14,6 +14,12 @@ public class CoordinadorProyecto
 	
 	
 	//METODOS DEL COORDINADOR
+	public void guardarArchivo()
+	{
+		archivoProyectos.guardarInfoProyecto(proyectoEnUso);
+	}
+	
+	
 	public void crearProyecto(String nombreProyecto, String descripcion, String fechaInicio,
 							  String fechaFin, ArrayList<String> tiposActividades, Participante autor)
 	{	
@@ -39,6 +45,11 @@ public class CoordinadorProyecto
 	
 	
 	//METODOS DEL PROYECTO
+	public WBS getWBS()
+	{
+		return proyectoEnUso.getWBS();
+	}
+	
 	public String getNombreProyecto()
 	{
 		return proyectoEnUso.getNombre();
@@ -89,27 +100,22 @@ public class CoordinadorProyecto
 	
 	
 	// METODOS DE LAS ACTIVIDADES
-	public void registrarActividad(String tipoActividad, String titulo, String descripcion, String fecha,
-								   String horaInicio, String horaFin, Participante participante, Tarea tarea)
+	public Actividad registrarActividad(String tipoActividad, String titulo, String descripcion, String fecha,
+					String horaInicio, String horaFin, Participante participante, Tarea tarea, boolean cierra) throws Exception
 	{
-		try
-		{
 			String tituloProyecto = proyectoEnUso.getNombre();
 			
 			Actividad proxy1 = new ProxyRegistro(tituloProyecto, tipoActividad, titulo, descripcion,
-												 fecha, horaInicio, horaFin, participante, false);
+												 fecha, horaInicio, horaFin, participante, cierra);
 			Actividad proxy2 = new ProxyRegistro(tituloProyecto, tipoActividad, titulo, descripcion,
-					 							 fecha, horaInicio, horaFin, participante, false);
+					 							 fecha, horaInicio, horaFin, participante, cierra);
+			Actividad proxy3 = new ProxyRegistro(tituloProyecto, tipoActividad, titulo, descripcion,
+					 							 fecha, horaInicio, horaFin, participante, cierra);
 
 			proyectoEnUso.registrarActividad(proxy1, proxy2, tarea);
-			archivoProyectos.guardarInfoProyecto(proyectoEnUso);
-		}
-		
-		catch (Exception e)
-		{
-			//COMPLETAR
-		}
-		
+			archivoProyectos.guardarInfoProyecto(proyectoEnUso);	
+			
+			return proxy3;
 	}
 
 	

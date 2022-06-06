@@ -55,7 +55,7 @@ public class VentanaAplicacion extends JFrame implements ActionListener
 		updateMenu();
 		
 		setSize(550, 600);
-		setTitle("Proyecto 2 - DPOO");
+		setTitle("Proyecto 3 - DPOO");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -129,9 +129,17 @@ public class VentanaAplicacion extends JFrame implements ActionListener
             
             else if (menuID.equals(2))
             {
-            	botonContinuar.setVisible(false);
             	menuActual.setVisible(false);
             	menuActual = new MenuProyecto(this);
+            	botonContinuar.setEnabled(true);
+            	updateMenu();
+            }
+            
+            else if (menuID.equals(3))
+            {
+            	botonContinuar.setVisible(false);
+            	menuActual.setVisible(false);
+            	menuActual = new MenuWBS(this);
             	updateMenu();
             }            
         }
@@ -148,12 +156,21 @@ public class VentanaAplicacion extends JFrame implements ActionListener
             	updateMenu();
             }
             
-            if (menuID.equals(3))
+            else if (menuID.equals(3))
+            {
+            	refresh();
+            	menuActual.setVisible(false);
+            	menuActual = new MenuEleccionProyecto(this);
+            	updateMenu();
+            }
+            
+            else if (menuID.equals(4))
             {
             	refresh();
             	botonContinuar.setVisible(true);
             	menuActual.setVisible(false);
-            	menuActual = new MenuEleccionProyecto(this);
+            	menuActual = new MenuProyecto(this);
+            	botonContinuar.setEnabled(true);
             	updateMenu();
             }
         }

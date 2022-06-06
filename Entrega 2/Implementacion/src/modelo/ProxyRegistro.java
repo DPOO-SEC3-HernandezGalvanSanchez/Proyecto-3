@@ -23,6 +23,11 @@ public class ProxyRegistro implements Actividad
 		this.elRegistro = elRegistro;
 	}
 	
+	public String toString()
+	{
+		return elRegistro.toString();
+	}
+	
 	public String getTipoActividad()
 	{
 		return elRegistro.getTipoActividad();

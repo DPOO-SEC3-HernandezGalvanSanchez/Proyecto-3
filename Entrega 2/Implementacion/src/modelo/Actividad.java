@@ -11,6 +11,7 @@ public interface Actividad
 	public Participante getAutor();
 	public int getTiempo();
 	public boolean cierraTarea();
+	public String toString();
 	public void setFecha(String nuevaFecha);
 	public void setHoraInicio(String nuevaHoraInicio);
 	public void setHoraFin(String nuevaHoraFin);

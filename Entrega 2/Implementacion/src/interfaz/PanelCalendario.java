@@ -83,9 +83,4 @@ public class PanelCalendario extends JPanel {
 			
 		}
 	}
-	
-	private void pintarDetalles()
-	{
-		
-	}
 }
