@@ -38,7 +38,7 @@ public class PanelLogin1 extends JPanel implements ActionListener
 		mensaje.setFont(new Font("Bold", Font.PLAIN, 13));
 		add(mensaje);
 		
-		cuadroTexto = new JTextField("loginE2");
+		cuadroTexto = new JTextField("loginE1");
 		cuadroTexto.setBounds(280, 69, 100, 23);
 		add(cuadroTexto);
 		

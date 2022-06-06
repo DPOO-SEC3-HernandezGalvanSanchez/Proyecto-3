@@ -15,7 +15,8 @@ import procesamiento.ArchivoUsuarios;
 public class MenuWBS extends Menu
 {
 	private VentanaAplicacion ventana;
-	private PanelWBSTree p1;
+	private PanelWBS1 p1;
+	private PanelWBS2 p2;
 	
 	
 	public MenuWBS(VentanaAplicacion padre)
@@ -27,8 +28,11 @@ public class MenuWBS extends Menu
 		
 		WBS wbs = ventana.getCoordinadorProyecto().getWBS();
 		
-		p1 = new PanelWBSTree(this, wbs);
+		p1 = new PanelWBS1(this, wbs);
 		this.add(p1);
+		
+		p2 = new PanelWBS2(this, wbs);
+		this.add(p2);
 	}
 	
 	public Actividad agregarActividad(String tipoActividad, String titulo, String descripcion,

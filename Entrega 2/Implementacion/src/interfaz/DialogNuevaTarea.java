@@ -29,7 +29,7 @@ public class DialogNuevaTarea extends JDialog implements ActionListener, KeyList
 	final int x = 220;
 	final int spacing = 40;
 	
-	private PanelWBSTree padre;
+	private PanelWBS1 padre;
 	private int index;
 	
 	private JPanel settingsTask;
@@ -43,7 +43,7 @@ public class DialogNuevaTarea extends JDialog implements ActionListener, KeyList
 	private JLabel textLabel;
 	
 	
-	public DialogNuevaTarea(PanelWBSTree padre, int index)
+	public DialogNuevaTarea(PanelWBS1 padre, int index)
 	{	
 		this.padre = padre;
 		this.index = index;

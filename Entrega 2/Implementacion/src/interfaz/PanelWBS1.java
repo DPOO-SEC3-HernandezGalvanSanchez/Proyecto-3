@@ -23,7 +23,7 @@ import modelo.WBS;
 
 
 @SuppressWarnings("serial")
-public class PanelWBSTree extends JPanel implements ActionListener, TreeSelectionListener
+public class PanelWBS1 extends JPanel implements ActionListener, TreeSelectionListener
 {
 	private MenuWBS padre;
 	private WBS wbs;
@@ -37,7 +37,7 @@ public class PanelWBSTree extends JPanel implements ActionListener, TreeSelectio
 	private Tarea tareaSeleccionada;
 	
 	
-	public PanelWBSTree(MenuWBS padre, WBS wbs)
+	public PanelWBS1(MenuWBS padre, WBS wbs)
 	{  
 		super(new GridLayout(1,2));
 		setBorder(new EtchedBorder());
